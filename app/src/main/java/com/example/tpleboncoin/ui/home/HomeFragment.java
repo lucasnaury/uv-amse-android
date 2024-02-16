@@ -139,7 +139,7 @@ public class HomeFragment extends Fragment {
     private void initDataset() {
         mDataset = new Annonce[DATASET_COUNT];
         for (int i = 0; i < DATASET_COUNT; i++) {
-            Annonce annonce = new Annonce("Titre", "Adresse", 0);
+            Annonce annonce = new Annonce("Titre " + i, "Adresse " + i, 0);
             mDataset[i] = annonce;
         }
     }
