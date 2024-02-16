@@ -1,4 +1,4 @@
-package com.example.tpleboncoin.ui.dashboard;
+package com.example.tpleboncoin.ui.ajout_annonce;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.tpleboncoin.databinding.FragmentDashboardBinding;
+import com.example.tpleboncoin.databinding.FragmentAjoutAnnonceBinding;
 
-public class DashboardFragment extends Fragment {
+public class AjoutAnnonceFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentAjoutAnnonceBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        AjoutAnnonceViewModel ajout_annonceViewModel =
+                new ViewModelProvider(this).get(AjoutAnnonceViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentAjoutAnnonceBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textAjoutAnnonce;
+        ajout_annonceViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
