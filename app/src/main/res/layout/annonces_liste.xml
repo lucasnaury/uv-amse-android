@@ -14,33 +14,50 @@
         android:orientation="horizontal"
         android:padding="8dp">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_launcher_background" />
-
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/titre_annonce"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:paddingLeft="8dp"
-                android:text="Titre annonce de test"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_launcher_background" />
 
-            <TextView
-                android:id="@+id/adresse_annonce"
-                android:layout_width="148dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="8dp"
-                android:text="Adresse, 59000 Douai" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/titre_annonce"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingLeft="8dp"
+                    android:text="Titre annonce de test"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                <TextView
+                    android:id="@+id/adresse_annonce"
+                    android:layout_width="148dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:text="Adresse, 59000 Douai" />
+            </LinearLayout>
+
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/prix_annonce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-black"
+            android:text="12.99€"
+            android:textAlignment="viewEnd"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     </LinearLayout>
 
