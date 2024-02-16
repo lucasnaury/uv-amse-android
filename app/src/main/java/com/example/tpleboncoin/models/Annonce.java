@@ -5,6 +5,7 @@ public class Annonce {
     private int id;
     private String titre;
     private String  adresse;
+    private float prix;
     private int image;
 
     // Constructeur
@@ -12,6 +13,7 @@ public class Annonce {
         this.titre = titre;
         this.adresse = adresse;
         this.image = image;
+        this.prix = prix;
 
         // Génération d'un id automatique
         this.id = Annonce.nbAnnonces;
@@ -25,6 +27,10 @@ public class Annonce {
     public void setTitre(String titre) {
         this.titre = titre;
     }
+
+    public float getPrix(){return prix;}
+    public String getAdresse(){return adresse;}
+    public int getImage(){return image;}
 
 
 }
