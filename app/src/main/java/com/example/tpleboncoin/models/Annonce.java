@@ -5,11 +5,11 @@ public class Annonce {
     private int id;
     private String titre;
     private String  adresse;
-    private float prix;
+    private double prix;
     private int image;
 
     // Constructeur
-    public Annonce(String titre, String adresse, int image, float prix) {
+    public Annonce(String titre, String adresse, int image, double prix) {
         this.titre = titre;
         this.adresse = adresse;
         this.image = image;
