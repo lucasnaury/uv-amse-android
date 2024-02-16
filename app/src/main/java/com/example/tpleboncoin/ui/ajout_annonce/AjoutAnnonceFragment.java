@@ -1,14 +1,24 @@
 package com.example.tpleboncoin.ui.ajout_annonce;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -22,6 +32,8 @@ import com.google.android.material.snackbar.Snackbar;
 public class AjoutAnnonceFragment extends Fragment {
 
     private FragmentAjoutAnnonceBinding binding;
+
+    private ActivityResultLauncher<Intent> activityResultLauncher;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +71,63 @@ public class AjoutAnnonceFragment extends Fragment {
             }
         });
 
+
+        final Button boutonAppareilPhoto = binding.photoBtn;
+        final Button boutonGalerie = binding.galerieBtn;
+        final ImageView imageAnnonce = binding.imageAnnonce;
+
+        boutonGalerie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                choisirImageDansGalerie();
+            }
+        });
+        boutonAppareilPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prendrePhoto();
+            }
+        });
+
+
+
+        activityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+
+                        if(data != null) {
+                            // On récupère l'URL de l'image
+                            Uri selectedImageUri = data.getData();
+
+                            if (selectedImageUri != null) {
+                                // S'il y a bien une image, on l'affiche à l'écran
+                                imageAnnonce.setImageURI(selectedImageUri);
+                                imageAnnonce.setVisibility(View.VISIBLE);
+                            } else {
+                                // S'il n'y  a pas de chemin, c'est que l'image est stockée en BMP
+                                // dans les données du résultat (appareil photo)
+                                Bitmap photo = (Bitmap) data.getExtras().get("data");
+
+                                if (photo == null) {
+                                    return;
+                                }
+
+                                // S'il y a bien une photo, on l'affiche à l'écran
+                                imageAnnonce.setImageBitmap(photo);
+                                imageAnnonce.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                    }
+                }
+            });
+
+
+
         return root;
     }
 
@@ -66,5 +135,25 @@ public class AjoutAnnonceFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+
+    // Gestion des images
+    private void choisirImageDansGalerie(){
+        // Create an instance of the Intent of the type image
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+
+        // Lancement de l'activité qui permet de sélectionner une image dans la galerie
+        activityResultLauncher.launch(Intent.createChooser(i, "Select Picture"));
+
+    }
+
+    private void prendrePhoto(){
+        Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        // Lancement de l'activité qui permet de prendre une photo
+        activityResultLauncher.launch(Intent.createChooser(camera_intent, "Take Picture"));
     }
 }

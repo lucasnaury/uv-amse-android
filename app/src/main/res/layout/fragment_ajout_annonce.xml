@@ -28,11 +28,50 @@
             android:layout_height="wrap_content"
             android:minHeight="@dimen/activity_vertical_margin" />
 
-        <ImageButton
-            android:id="@+id/imageButton"
+        <TextView
+            android:id="@+id/titreImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_add_box_24" />
+            android:fontFamily="sans-serif-medium"
+            android:text="Image :"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <ImageView
+            android:id="@+id/imageAnnonce"
+            android:layout_width="match_parent"
+            android:layout_height="162dp"
+            android:visibility="gone"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <LinearLayout
+            android:id="@+id/imagesBtnContainer"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/photoBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Photo"
+                app:icon="@drawable/ic_baseline_add_a_photo_24"
+                app:iconGravity="textStart" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/galerieBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Galerie"
+                app:icon="@drawable/ic_baseline_add_photo_alternate_24"
+                app:iconGravity="textStart" />
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
