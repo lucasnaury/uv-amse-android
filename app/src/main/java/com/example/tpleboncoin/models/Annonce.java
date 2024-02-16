@@ -9,7 +9,7 @@ public class Annonce {
     private int image;
 
     // Constructeur
-    public Annonce(String titre, String adresse, int image) {
+    public Annonce(String titre, String adresse, int image, float prix) {
         this.titre = titre;
         this.adresse = adresse;
         this.image = image;
