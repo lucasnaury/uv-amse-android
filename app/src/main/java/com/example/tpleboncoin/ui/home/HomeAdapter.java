@@ -22,7 +22,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
+        private final TextView titreTextView;
+        private final TextView adresseTextView;
 
         public ViewHolder(View v) {
             super(v);
@@ -33,11 +34,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                     Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
                 }
             });
-            textView = (TextView) v.findViewById(R.id.text_annonce);
+            titreTextView = (TextView) v.findViewById(R.id.titre_annonce);
+            adresseTextView = (TextView) v.findViewById(R.id.adresse_annonce);
         }
 
-        public TextView getTextView() {
-            return textView;
+        public TextView getTitreTextView() {
+            return titreTextView;
+        }
+        public TextView getAdresseTextView() {
+            return adresseTextView;
         }
     }
     // END_INCLUDE(recyclerViewSampleViewHolder)
@@ -71,7 +76,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
-        viewHolder.getTextView().setText(mDataSet[position].getTitre());
+        viewHolder.getTitreTextView().setText(mDataSet[position].getTitre());
+        viewHolder.getAdresseTextView().setText(mDataSet[position].getAdresse());
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 
