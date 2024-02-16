@@ -16,7 +16,7 @@ import androidx.navigation.Navigation;
 
 import com.example.tpleboncoin.R;
 import com.example.tpleboncoin.databinding.FragmentAjoutAnnonceBinding;
-import com.example.tpleboncoin.ui.home.HomeFragment;
+import com.example.tpleboncoin.models.Annonce;
 import com.google.android.material.snackbar.Snackbar;
 
 public class AjoutAnnonceFragment extends Fragment {
@@ -45,14 +45,17 @@ public class AjoutAnnonceFragment extends Fragment {
 
                     Snackbar.make(view, "Veuillez remplir les champs pour créer l'annonce", Snackbar.LENGTH_LONG).show();
 
-
-
                     return;
                 }
 
-                Navigation.findNavController(view).navigate(R.id.navigation_home);
-                //Intent voirNouvelleListe = new Intent(HomeFragment.this, Accelerometre.class);
-                //startActivity(voirAccel);
+                // On créé l'objet de la nouvelle annonce
+                Annonce nouvelleAnnonce = new Annonce(titreAnnonce.getText().toString(), adresseAnnonce.getText().toString(), 0, Double.parseDouble(prixAnnonce.getText().toString()));
+
+                // On navigue vers la page d'accueil en passant la nouvelle annonce comme paramètre
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("nouvelleAnnonce", nouvelleAnnonce);
+                Navigation.findNavController(view).navigate(R.id.navigation_home, bundle);
+
             }
         });
 

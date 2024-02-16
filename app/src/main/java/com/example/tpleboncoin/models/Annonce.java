@@ -1,6 +1,11 @@
 package com.example.tpleboncoin.models;
 
-public class Annonce {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class Annonce implements Parcelable {
     static int nbAnnonces = 0;
     private int id;
     private String titre;
@@ -33,4 +38,36 @@ public class Annonce {
     public int getImage(){return image;}
 
 
+    // Parcelable
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(titre);
+        parcel.writeString(adresse);
+
+        parcel.writeDouble(prix);
+        parcel.writeInt(image);
+        parcel.writeInt(id);
+    }
+    public static final Parcelable.Creator<Annonce> CREATOR
+            = new Parcelable.Creator<Annonce>() {
+        public Annonce createFromParcel(Parcel in) {
+            return new Annonce(in);
+        }
+
+        public Annonce[] newArray(int size) {
+            return new Annonce[size];
+        }
+    };
+    private Annonce(Parcel in) {
+        titre = in.readString();
+        adresse = in.readString();
+        prix = in.readDouble();
+        image = in.readInt();
+        id = in.readInt();
+    }
 }

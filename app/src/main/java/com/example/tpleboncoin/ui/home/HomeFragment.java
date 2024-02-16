@@ -1,6 +1,9 @@
 package com.example.tpleboncoin.ui.home;
 
+import static android.util.Log.DEBUG;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tpleboncoin.databinding.FragmentHomeBinding;
+import com.example.tpleboncoin.models.Annonce;
 
 public class HomeFragment extends Fragment {
 
@@ -26,6 +30,13 @@ public class HomeFragment extends Fragment {
 
         final TextView textView = binding.textHome;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        // On récupère l'annonce qui vient d'être créée s'il y en a une
+        if(getArguments() != null && getArguments().getParcelable("nouvelleAnnonce") != null){
+            Annonce newAnnonce = getArguments().getParcelable("nouvelleAnnonce");
+            Log.d("HomeFragment", newAnnonce.getTitre());
+        }
+
         return root;
     }
 
