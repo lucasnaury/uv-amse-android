@@ -28,7 +28,7 @@ public class Annonce {
         this.titre = titre;
     }
 
-    public float getPrix(){return prix;}
+    public double getPrix(){return prix;}
     public String getAdresse(){return adresse;}
     public int getImage(){return image;}
 
