@@ -2,6 +2,7 @@ package com.example.tpleboncoin;
 
 import android.os.Bundle;
 
+import com.example.tpleboncoin.models.Annonce;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,9 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.tpleboncoin.databinding.ActivityMainBinding;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
@@ -19,6 +23,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ArrayList<Annonce> annonces = new ArrayList<Annonce>();
+        annonces.add(new Annonce("Annonce 1", "43 rue du test",12, 12.3));
+        annonces.add(new Annonce("Annonce 2", "12 rue du android",14, 9.3));
+        annonces.add(new Annonce("Annonce 3", "98 avenue du test",11, 0.3));
+        annonces.add(new Annonce("Annonce 4", "17 boulevard du test",10, 120.3));
+
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
