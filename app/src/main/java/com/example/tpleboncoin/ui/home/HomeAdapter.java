@@ -16,6 +16,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private static final String TAG = "CustomAdapter";
 
     private Annonce[] mDataSet;
+    private boolean mIsGrid;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -52,8 +53,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
      *
      * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
      */
-    public HomeAdapter(Annonce[] dataSet) {
+    public HomeAdapter(Annonce[] dataSet, boolean isGrid) {
         mDataSet = dataSet;
+        mIsGrid = isGrid;
     }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
@@ -61,8 +63,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view.
-        View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.annonces_liste, viewGroup, false);
+        View v;
+        if (mIsGrid) {
+            v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.annonces_grid, viewGroup, false);
+        }
+        else {
+            v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.annonces_liste, viewGroup, false);
+        }
 
         return new ViewHolder(v);
     }

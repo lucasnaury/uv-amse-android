@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        mAdapter = new HomeAdapter(mDataset);
+        mAdapter = new HomeAdapter(mDataset, false);
         // Set CustomAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
@@ -111,10 +111,16 @@ public class HomeFragment extends Fragment {
             case GRID_LAYOUT_MANAGER:
                 mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT);
                 mCurrentLayoutManagerType = LayoutManagerType.GRID_LAYOUT_MANAGER;
+                mAdapter = new HomeAdapter(mDataset, true);
+                // Set CustomAdapter as the adapter for RecyclerView.
+                mRecyclerView.setAdapter(mAdapter);
                 break;
             case LINEAR_LAYOUT_MANAGER:
                 mLayoutManager = new LinearLayoutManager(getActivity());
                 mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+                mAdapter = new HomeAdapter(mDataset, false);
+                // Set CustomAdapter as the adapter for RecyclerView.
+                mRecyclerView.setAdapter(mAdapter);
                 break;
             default:
                 mLayoutManager = new LinearLayoutManager(getActivity());

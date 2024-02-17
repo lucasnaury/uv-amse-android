@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -6,9 +7,16 @@
     android:minHeight="50dp">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:padding="10dp">
+
+        <TextView
+            android:id="@+id/adresse_annonce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/prix_annonce"
+            android:text="Adresse, 59000 Douai" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -20,30 +28,19 @@
             android:id="@+id/titre_annonce"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
             android:fontFamily="sans-serif-medium"
             android:text="Titre annonce de test"
-            android:layout_below="@+id/imageView"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <TextView
-            android:id="@+id/adresse_annonce"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Adresse, 59000 Douai"
-            android:layout_toEndOf="@id/titre_annonce"
-            android:layout_alignTop="@id/titre_annonce"
-            android:textAlignment="viewEnd"
-            />
-
-        <TextView
             android:id="@+id/prix_annonce"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/titre_annonce"
             android:layout_weight="1"
             android:fontFamily="sans-serif-black"
             android:text="12.99€"
-            android:textAlignment="viewEnd"
-            android:layout_toRightOf="@id/imageView"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </RelativeLayout>
 
