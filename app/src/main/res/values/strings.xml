@@ -3,4 +3,7 @@
     <string name="title_home">Accueil</string>
     <string name="title_add">Ajout</string>
     <string name="title_profile">Profil</string>
+    <string name="text_annonce">test</string>
+    <string name="linear_layout_manager">text</string>
+    <string name="grid_layout_manager">text</string>
 </resources>

@@ -1,0 +1,99 @@
+package com.example.tpleboncoin.ui.home;
+
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.tpleboncoin.R;
+import com.example.tpleboncoin.models.Annonce;
+
+
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
+    private static final String TAG = "CustomAdapter";
+
+    private Annonce[] mDataSet;
+    private boolean mIsGrid;
+
+    /**
+     * Provide a reference to the type of views that you are using (custom ViewHolder)
+     */
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView titreTextView;
+        private final TextView adresseTextView;
+
+        public ViewHolder(View v) {
+            super(v);
+            // Define click listener for the ViewHolder's View.
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // TODO : mettre la page de Donia
+                    Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
+                }
+            });
+            titreTextView = (TextView) v.findViewById(R.id.titre_annonce);
+            adresseTextView = (TextView) v.findViewById(R.id.adresse_annonce);
+        }
+
+        public TextView getTitreTextView() {
+            return titreTextView;
+        }
+        public TextView getAdresseTextView() {
+            return adresseTextView;
+        }
+    }
+
+    /**
+     * Initialize the dataset of the Adapter.
+     *
+     * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
+     * @param isGrid boolean = le layout actuel (grille ou linéaire)
+     */
+    public HomeAdapter(Annonce[] dataSet, boolean isGrid) {
+        mDataSet = dataSet;
+        mIsGrid = isGrid;
+    }
+
+    // Create new views (invoked by the layout manager)
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        // Create a new view. - Layout en fonction de la sélection
+        View v;
+        if (mIsGrid) {
+            v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.annonces_grid, viewGroup, false);
+        }
+        else {
+            v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.annonces_liste, viewGroup, false);
+        }
+
+        return new ViewHolder(v);
+    }
+
+    // Replace the contents of a view (invoked by the layout manager)
+    @Override
+    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+        Log.d(TAG, "Element " + position + " set.");
+
+        // Get element from dataset at this position and replace the contents of the view
+        // with that element
+        viewHolder.getTitreTextView().setText(mDataSet[position].getTitre());
+        viewHolder.getAdresseTextView().setText(mDataSet[position].getAdresse());
+    }
+
+    // Return the size of dataset (invoked by the layout manager)
+    @Override
+    public int getItemCount() {
+        return mDataSet.length;
+    }
+}
+
+
+
+
+
