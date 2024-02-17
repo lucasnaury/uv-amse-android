@@ -19,6 +19,9 @@ import com.example.tpleboncoin.R;
 import com.example.tpleboncoin.models.Annonce;
 import com.example.tpleboncoin.databinding.FragmentHomeBinding;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeFragment extends Fragment {
 
     private static final String TAG = "RecyclerViewFragment";
@@ -39,7 +42,7 @@ public class HomeFragment extends Fragment {
     protected RecyclerView mRecyclerView;
     protected HomeAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected Annonce[] mDataset;
+    protected ArrayList<Annonce> mDataset;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,14 @@ public class HomeFragment extends Fragment {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
+
+        // On récupère l'annonce qui vient d'être créée s'il y en a une
+        if(getArguments() != null && getArguments().getParcelable("nouvelleAnnonce") != null){
+            Annonce newAnnonce = getArguments().getParcelable("nouvelleAnnonce");
+            Log.d("HomeFragment", newAnnonce.getTitre());
+            mDataset.add(newAnnonce);
+        }
+
         // adapter pour gérer le visu de l'annonce
         mAdapter = new HomeAdapter(mDataset, false);
         mRecyclerView.setAdapter(mAdapter);
@@ -92,12 +103,6 @@ public class HomeFragment extends Fragment {
                 setRecyclerViewLayoutManager(LayoutManagerType.GRID_LAYOUT_MANAGER);
             }
         });
-
-        // On récupère l'annonce qui vient d'être créée s'il y en a une
-        if(getArguments() != null && getArguments().getParcelable("nouvelleAnnonce") != null){
-            Annonce newAnnonce = getArguments().getParcelable("nouvelleAnnonce");
-            Log.d("HomeFragment", newAnnonce.getTitre());
-        }
 
         return rootView;
     }
@@ -155,10 +160,10 @@ public class HomeFragment extends Fragment {
      * from a local content provider or remote server.
      */
     private void initDataset() {
-        mDataset = new Annonce[DATASET_COUNT];
+        mDataset = new ArrayList<Annonce>();
         for (int i = 0; i < DATASET_COUNT; i++) {
             Annonce annonce = new Annonce("Titre " + i, "Adresse " + i, 0, 12.99);
-            mDataset[i] = annonce;
+            mDataset.add(annonce);
         }
     }
 }

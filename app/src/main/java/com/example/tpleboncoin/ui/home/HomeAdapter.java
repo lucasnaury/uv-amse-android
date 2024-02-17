@@ -11,11 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tpleboncoin.R;
 import com.example.tpleboncoin.models.Annonce;
 
+import java.util.ArrayList;
+
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private static final String TAG = "CustomAdapter";
 
-    private Annonce[] mDataSet;
+    private ArrayList<Annonce> mDataSet;
     private boolean mIsGrid;
 
     /**
@@ -53,7 +55,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
      * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
      * @param isGrid boolean = le layout actuel (grille ou linéaire)
      */
-    public HomeAdapter(Annonce[] dataSet, boolean isGrid) {
+    public HomeAdapter(ArrayList<Annonce> dataSet, boolean isGrid) {
         mDataSet = dataSet;
         mIsGrid = isGrid;
     }
@@ -82,14 +84,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
         // Get element from dataset at this position and replace the contents of the view
         // with that element
-        viewHolder.getTitreTextView().setText(mDataSet[position].getTitre());
-        viewHolder.getAdresseTextView().setText(mDataSet[position].getAdresse());
+        viewHolder.getTitreTextView().setText(mDataSet.get(position).getTitre());
+        viewHolder.getAdresseTextView().setText(mDataSet.get(position).getAdresse());
     }
 
     // Return the size of dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataSet.length;
+        return mDataSet.toArray().length;
     }
 }
 
