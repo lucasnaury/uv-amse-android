@@ -12,6 +12,14 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/VueTypeSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:text="Vue :"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
         <RadioButton
             android:id="@+id/linear_layout_rb"
             android:layout_width="wrap_content"
