@@ -79,8 +79,10 @@ public class HomeFragment extends Fragment {
         // On récupère l'annonce qui vient d'être créée s'il y en a une
         if(getArguments() != null && getArguments().getParcelable("nouvelleAnnonce") != null){
             Annonce newAnnonce = getArguments().getParcelable("nouvelleAnnonce");
-            Log.d("HomeFragment", newAnnonce.getTitre());
-            mDataset.add(newAnnonce);
+
+            // On ajoute la nouvelle annonce en haut de la liste
+            mDataset.add(0, newAnnonce);
+
         }
 
         // adapter pour gérer le visu de l'annonce
