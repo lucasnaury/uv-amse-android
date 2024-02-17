@@ -49,15 +49,14 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // vue de base :
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         rootView.setTag(TAG);
 
-        // BEGIN_INCLUDE(initializeRecyclerView)
+        // Vue qui gère les éléments (annonces)
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
-        // LinearLayoutManager is used here, this will layout the elements in a similar fashion
-        // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
-        // elements are laid out.
+        // pour gérer le layout (grille ou liste linéaire)
         mLayoutManager = new LinearLayoutManager(getActivity());
 
         mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
@@ -69,11 +68,11 @@ public class HomeFragment extends Fragment {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
+        // adapter pour gérer le visu de l'annonce
         mAdapter = new HomeAdapter(mDataset, false);
-        // Set CustomAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
-        // END_INCLUDE(initializeRecyclerView)
 
+        // bouton pour changer de layout
         mLinearLayoutRadioButton = (RadioButton) rootView.findViewById(R.id.linear_layout_rb);
         mLinearLayoutRadioButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,19 +106,22 @@ public class HomeFragment extends Fragment {
                     .findFirstCompletelyVisibleItemPosition();
         }
 
+        // on change de layout
         switch (layoutManagerType) {
             case GRID_LAYOUT_MANAGER:
                 mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT);
                 mCurrentLayoutManagerType = LayoutManagerType.GRID_LAYOUT_MANAGER;
+
+                // redéfinition de l'adapter
                 mAdapter = new HomeAdapter(mDataset, true);
-                // Set CustomAdapter as the adapter for RecyclerView.
                 mRecyclerView.setAdapter(mAdapter);
                 break;
             case LINEAR_LAYOUT_MANAGER:
                 mLayoutManager = new LinearLayoutManager(getActivity());
                 mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+
+                // redéfinition de l'adapter
                 mAdapter = new HomeAdapter(mDataset, false);
-                // Set CustomAdapter as the adapter for RecyclerView.
                 mRecyclerView.setAdapter(mAdapter);
                 break;
             default:
