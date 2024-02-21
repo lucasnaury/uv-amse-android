@@ -24,7 +24,6 @@ public class DBManager {
 
     private DBManager(Context c) {
         context = c;
-        //init(); // Useful for adding ads for the first time.
     }
 
     public static DBManager getDBManager(Context context) {
@@ -37,6 +36,12 @@ public class DBManager {
     public DBManager open() throws SQLException {
         dbHelper = new DBHelper(context);
         database = dbHelper.getWritableDatabase();
+
+        //S'il n'y a pas d'annonce, on initialise une liste d'annonces
+        if(this.getAll().size() == 0){
+            init();
+        }
+
         return this;
     }
 
@@ -100,17 +105,15 @@ public class DBManager {
 
         Cursor cursor = this.fetch();
 
-        if (cursor.moveToFirst()) {
-            do {
-                String titre = cursor.getString(abs(cursor.getColumnIndex(DBHelper.TITLE)));
-                String adresse = cursor.getString(abs(cursor.getColumnIndex(DBHelper.ADDRESS)));
-                String image = cursor.getString(abs(cursor.getColumnIndex(DBHelper.IMAGE)));
-                double prix = cursor.getDouble(abs(cursor.getColumnIndex(DBHelper.PRICE)));
-                String description = cursor.getString(abs(cursor.getColumnIndex(DBHelper.DESCRIPTION)));
+        do {
+            String titre = cursor.getString(abs(cursor.getColumnIndex(DBHelper.TITLE)));
+            String adresse = cursor.getString(abs(cursor.getColumnIndex(DBHelper.ADDRESS)));
+            String image = cursor.getString(abs(cursor.getColumnIndex(DBHelper.IMAGE)));
+            double prix = cursor.getDouble(abs(cursor.getColumnIndex(DBHelper.PRICE)));
+            String description = cursor.getString(abs(cursor.getColumnIndex(DBHelper.DESCRIPTION)));
 
-                annonces.add(new Annonce(titre, adresse, image, prix, description));
-            } while (cursor.moveToNext());
-        }
+            annonces.add(new Annonce(titre, adresse, image, prix, description));
+        } while (cursor.moveToNext());
 
         return annonces;
     }
