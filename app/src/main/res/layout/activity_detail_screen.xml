@@ -50,7 +50,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/smsButton"
                 app:layout_constraintHorizontal_bias="0.46"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_launcher_background" />
 
             <TextView
                 android:id="@+id/titreTextView"

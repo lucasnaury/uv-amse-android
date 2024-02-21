@@ -36,7 +36,11 @@ public class DetailScreen extends AppCompatActivity {
                     binding.descriptionTextView4.setJustificationMode(LineBreaker.JUSTIFICATION_MODE_INTER_WORD);
                 }
                 binding.titreTextView.setText(annonce.getTitre());
-                binding.imageView.setImageURI(Uri.parse("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuN0ilDzXue08UjwoRi4jiqj0Y9FWs7jDhYY949clvcVYpoCUZzH1OkTKv5-FqBHDwKG0&usqp=CAU"));
+
+                if(annonce.getImage() != null){
+                    binding.imageView.setImageBitmap(annonce.getImageAsBitmap());
+                }
+
             }
             binding.smsButton.setOnClickListener(new View.OnClickListener() {
                 @Override

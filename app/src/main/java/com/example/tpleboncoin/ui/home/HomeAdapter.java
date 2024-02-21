@@ -106,15 +106,17 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
         Log.d(TAG, "Element " + position + " set.");
 
         //Byte array to img
-        InputStream is = new ByteArrayInputStream(mDataSet.get(position).getImage());
-        Bitmap bmpImage = BitmapFactory.decodeStream(is);
+        if(mDataSet.get(position).getImage() != null){
+            Bitmap bmpImage = mDataSet.get(position).getImageAsBitmap();
+            viewHolder.getImageView().setImageBitmap(bmpImage);
+        }
 
         // Get element from dataset at this position and replace the contents of the view
         // with that element
         viewHolder.getTitreTextView().setText(mDataSet.get(position).getTitre());
         viewHolder.getAdresseTextView().setText(mDataSet.get(position).getAdresse());
         viewHolder.getPrixTextView().setText(String.format("%,.2f €", mDataSet.get(position).getPrix()));
-        viewHolder.getImageView().setImageBitmap(bmpImage);
+
     }
 
     // Return the size of dataset (invoked by the layout manager)

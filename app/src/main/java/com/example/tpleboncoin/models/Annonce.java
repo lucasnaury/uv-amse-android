@@ -1,9 +1,14 @@
 package com.example.tpleboncoin.models;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 public class Annonce implements Parcelable {
     static int nbAnnonces = 0;
@@ -38,6 +43,17 @@ public class Annonce implements Parcelable {
     public double getPrix(){return prix;}
     public String getAdresse(){return adresse;}
     public byte[] getImage(){return image;}
+    public Bitmap getImageAsBitmap(){
+        byte[] img = this.getImage();
+        if(img == null){
+            return null;
+        }
+
+        InputStream is = new ByteArrayInputStream(img);
+        Bitmap bmpImage = BitmapFactory.decodeStream(is);
+
+        return bmpImage;
+    }
     public String getDescription(){return description;}
 
 
@@ -54,8 +70,11 @@ public class Annonce implements Parcelable {
 
         parcel.writeDouble(prix);
 
-        parcel.writeInt(image.length);
-        parcel.writeByteArray(image);
+        int imageLength = image != null ? image.length : 0;
+        parcel.writeInt(imageLength);
+        if(imageLength>0){
+            parcel.writeByteArray(image);
+        }
 
         parcel.writeString(description);
         parcel.writeInt(id);
@@ -76,8 +95,15 @@ public class Annonce implements Parcelable {
 
         prix = in.readDouble();
 
-        image = new byte[in.readInt()];
-        in.readByteArray(image);
+        int imageLength = in.readInt();
+
+        if(imageLength > 0){
+            image = new byte[imageLength];
+            in.readByteArray(image);
+        }else{
+            image = null;
+        }
+
 
         description = in.readString();
         id = in.readInt();

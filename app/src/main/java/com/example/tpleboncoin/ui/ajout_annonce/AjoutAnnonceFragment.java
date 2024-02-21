@@ -3,6 +3,7 @@ package com.example.tpleboncoin.ui.ajout_annonce;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -73,10 +74,16 @@ public class AjoutAnnonceFragment extends Fragment {
                 }
 
                 // On convertit l'image en byte array
-                Bitmap bitmap = ((BitmapDrawable) imageAnnonce.getDrawable()).getBitmap();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                byte[] imageInByte = baos.toByteArray();
+                byte[] imageInByte = null;
+                if(imageAnnonce.getVisibility() == View.VISIBLE){
+                    Bitmap bitmap = ((BitmapDrawable) imageAnnonce.getDrawable()).getBitmap();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap = resizeBitmap(bitmap, 500);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+
+                    imageInByte = baos.toByteArray();
+                }
+
 
                 // On créé l'objet de la nouvelle annonce
                 Annonce nouvelleAnnonce = new Annonce(titreAnnonce.getText().toString(), adresseAnnonce.getText().toString(), imageInByte, Double.parseDouble(prixAnnonce.getText().toString()), descriptionAnnonce.getText().toString());
@@ -157,6 +164,26 @@ public class AjoutAnnonceFragment extends Fragment {
 
 
     // Gestion des images
+    private Bitmap resizeBitmap(Bitmap image, int maxSize){
+        // Don't resize if already small image
+        if(image.getWidth()<maxSize && image.getHeight()<maxSize){
+            return image;
+        }
+
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float)width / (float) height;
+        if (bitmapRatio > 1) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+
     private void choisirImageDansGalerie(){
         // Create an instance of the Intent of the type image
         Intent i = new Intent();
