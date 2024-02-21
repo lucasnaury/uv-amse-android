@@ -11,10 +11,10 @@ public class Annonce implements Parcelable {
     private String titre;
     private String  adresse;
     private double prix;
-    private int image;
+    private String image;
 
     // Constructeur
-    public Annonce(String titre, String adresse, int image, double prix) {
+    public Annonce(String titre, String adresse, String image, double prix) {
         this.titre = titre;
         this.adresse = adresse;
         this.image = image;
@@ -35,7 +35,7 @@ public class Annonce implements Parcelable {
 
     public double getPrix(){return prix;}
     public String getAdresse(){return adresse;}
-    public int getImage(){return image;}
+    public String getImage(){return image;}
 
 
     // Parcelable
@@ -50,7 +50,7 @@ public class Annonce implements Parcelable {
         parcel.writeString(adresse);
 
         parcel.writeDouble(prix);
-        parcel.writeInt(image);
+        parcel.writeString(image);
         parcel.writeInt(id);
     }
     public static final Parcelable.Creator<Annonce> CREATOR
@@ -67,7 +67,7 @@ public class Annonce implements Parcelable {
         titre = in.readString();
         adresse = in.readString();
         prix = in.readDouble();
-        image = in.readInt();
+        image = in.readString();
         id = in.readInt();
     }
 }

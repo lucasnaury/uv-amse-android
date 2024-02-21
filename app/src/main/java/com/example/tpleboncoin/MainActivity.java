@@ -24,13 +24,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ArrayList<Annonce> annonces = new ArrayList<Annonce>();
-        annonces.add(new Annonce("Annonce 1", "43 rue du test",12, 12.3));
-        annonces.add(new Annonce("Annonce 2", "12 rue du android",14, 9.3));
-        annonces.add(new Annonce("Annonce 3", "98 avenue du test",11, 0.3));
-        annonces.add(new Annonce("Annonce 4", "17 boulevard du test",10, 120.3));
-
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

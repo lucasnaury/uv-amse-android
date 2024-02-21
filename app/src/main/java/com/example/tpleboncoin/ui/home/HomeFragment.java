@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tpleboncoin.R;
+import com.example.tpleboncoin.db.DBManager;
 import com.example.tpleboncoin.models.Annonce;
 import com.example.tpleboncoin.databinding.FragmentHomeBinding;
 
@@ -162,10 +163,11 @@ public class HomeFragment extends Fragment {
      * from a local content provider or remote server.
      */
     private void initDataset() {
-        mDataset = new ArrayList<Annonce>();
-        for (int i = 0; i < DATASET_COUNT; i++) {
-            Annonce annonce = new Annonce("Titre " + i, "Adresse " + i, 0, 12.99);
-            mDataset.add(annonce);
-        }
+        DBManager dbManager = DBManager.getDBManager(this.getContext());
+        dbManager.open();
+
+        // On récupère toutes les annonces de la DB
+        mDataset = dbManager.getAll();
+
     }
 }
