@@ -23,9 +23,8 @@ import java.util.ArrayList;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
     private static final String TAG = "CustomAdapter";
 
-    private ArrayList<Annonce> mDataSet;
+    private static ArrayList<Annonce> mDataSet;
     private boolean mIsGrid;
-    private static Context mContext;
 
     /**
      * Provide a reference to the type of views that you are using (custom ViewHolder)
@@ -33,6 +32,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView titreTextView;
         private final TextView adresseTextView;
+        private final TextView prixTextView;
 
         public ViewHolder(View v) {
             super(v);
@@ -41,9 +41,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
                 @Override
                 public void onClick(View v) {
                     // TODO : mettre la page de Donia
-                    Intent detailIntent = new Intent(mContext, DetailScreen.class);
-                    detailIntent.putExtra("titre", titreTextView.getText());
-                    detailIntent.putExtra("adresse", adresseTextView.getText());
+                    Intent detailIntent = new Intent(v.getContext(), DetailScreen.class);
+                    detailIntent.putExtra("annonce", mDataSet.get(getAdapterPosition()));
                     v.getContext().startActivity(detailIntent);
                     //detailIntent.putExtra("prix", prix);
                     Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
@@ -51,6 +50,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
             });
             titreTextView = (TextView) v.findViewById(R.id.titre_annonce);
             adresseTextView = (TextView) v.findViewById(R.id.adresse_annonce);
+            prixTextView = (TextView) v.findViewById(R.id.prix_annonce);
         }
 
         public TextView getTitreTextView() {
@@ -58,6 +58,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
         }
         public TextView getAdresseTextView() {
             return adresseTextView;
+        }
+        public TextView getPrixTextView() {
+            return prixTextView;
         }
     }
 
@@ -70,7 +73,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
     public HomeAdapter(ArrayList<Annonce> dataSet, boolean isGrid, Context context) {
         mDataSet = dataSet;
         mIsGrid = isGrid;
-        mContext = context;
     }
 
     // Create new views (invoked by the layout manager)

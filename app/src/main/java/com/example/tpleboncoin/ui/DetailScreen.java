@@ -20,15 +20,11 @@ public class DetailScreen extends AppCompatActivity {
             Intent intent = this.getIntent();
             if (intent != null){
                 Annonce annonce = intent.getParcelableExtra("annonce");
-                String titre = intent.getStringExtra("titre");
-                String adresse = intent.getStringExtra("adresse");
-                String description = intent.getStringExtra("description");
-                Double prix = intent.getDoubleExtra("prix",999);
 
-                binding.adresseTextView.setText(adresse);
-                binding.prixTextView.setText(prix.toString()+" €");
+                binding.adresseTextView.setText(annonce.getAdresse());
+                binding.prixTextView.setText( Double.toString(annonce.getPrix()) + " €");
                 binding.imageView.setImageResource(R.drawable.ic_account_circle_black_24dp);
-                binding.descriptionTextView4.setText(description);
+                binding.descriptionTextView4.setText(annonce.);
                 binding.titreTextView.setText(titre);
             }
         }
