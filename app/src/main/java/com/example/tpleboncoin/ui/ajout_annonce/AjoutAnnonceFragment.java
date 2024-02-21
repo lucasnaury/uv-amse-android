@@ -3,6 +3,7 @@ package com.example.tpleboncoin.ui.ajout_annonce;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,6 +31,8 @@ import com.example.tpleboncoin.db.DBManager;
 import com.example.tpleboncoin.models.Annonce;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.ByteArrayOutputStream;
+
 public class AjoutAnnonceFragment extends Fragment {
 
     private FragmentAjoutAnnonceBinding binding;
@@ -50,11 +53,12 @@ public class AjoutAnnonceFragment extends Fragment {
         final EditText adresseAnnonce = binding.adresseAnnonce;
         final EditText prixAnnonce = binding.prixAnnonce;
         final EditText descriptionAnnonce = binding.descriptionAnnonce;
+        final ImageView imageAnnonce = binding.imageAnnonce;
         final Button boutonCreation = binding.boutonAjoutAnnonce;
 
         // Initialisation de la DB
         DBManager dbManager = DBManager.getDBManager(this.getContext());
-        dbManager.open();
+        dbManager.open(this.getContext());
 
 
         boutonCreation.setOnClickListener(new View.OnClickListener() {
@@ -68,8 +72,14 @@ public class AjoutAnnonceFragment extends Fragment {
                     return;
                 }
 
+                // On convertit l'image en byte array
+                Bitmap bitmap = ((BitmapDrawable) imageAnnonce.getDrawable()).getBitmap();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] imageInByte = baos.toByteArray();
+
                 // On créé l'objet de la nouvelle annonce
-                Annonce nouvelleAnnonce = new Annonce(titreAnnonce.getText().toString(), adresseAnnonce.getText().toString(), "", Double.parseDouble(prixAnnonce.getText().toString()), descriptionAnnonce.getText().toString());
+                Annonce nouvelleAnnonce = new Annonce(titreAnnonce.getText().toString(), adresseAnnonce.getText().toString(), imageInByte, Double.parseDouble(prixAnnonce.getText().toString()), descriptionAnnonce.getText().toString());
 
                 //On ajoute la nouvelle annonce à la DB
                 dbManager.insert(nouvelleAnnonce);
@@ -83,7 +93,6 @@ public class AjoutAnnonceFragment extends Fragment {
 
         final Button boutonAppareilPhoto = binding.photoBtn;
         final Button boutonGalerie = binding.galerieBtn;
-        final ImageView imageAnnonce = binding.imageAnnonce;
 
         boutonGalerie.setOnClickListener(new View.OnClickListener() {
             @Override

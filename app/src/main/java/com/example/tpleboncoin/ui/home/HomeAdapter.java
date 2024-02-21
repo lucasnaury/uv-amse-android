@@ -4,10 +4,13 @@ package com.example.tpleboncoin.ui.home;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -17,6 +20,8 @@ import com.example.tpleboncoin.R;
 import com.example.tpleboncoin.models.Annonce;
 import com.example.tpleboncoin.ui.DetailScreen;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 
@@ -31,6 +36,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView titreTextView;
+        private final ImageView imageView;
         private final TextView adresseTextView;
         private final TextView prixTextView;
 
@@ -51,6 +57,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
             titreTextView = (TextView) v.findViewById(R.id.titre_annonce);
             adresseTextView = (TextView) v.findViewById(R.id.adresse_annonce);
             prixTextView = (TextView) v.findViewById(R.id.prix_annonce);
+            imageView = (ImageView) v.findViewById(R.id.image_annonce);
         }
 
         public TextView getTitreTextView() {
@@ -62,6 +69,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
         public TextView getPrixTextView() {
             return prixTextView;
         }
+        public ImageView getImageView() { return imageView; }
     }
 
     /**
@@ -97,11 +105,16 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Log.d(TAG, "Element " + position + " set.");
 
+        //Byte array to img
+        InputStream is = new ByteArrayInputStream(mDataSet.get(position).getImage());
+        Bitmap bmpImage = BitmapFactory.decodeStream(is);
+
         // Get element from dataset at this position and replace the contents of the view
         // with that element
         viewHolder.getTitreTextView().setText(mDataSet.get(position).getTitre());
         viewHolder.getAdresseTextView().setText(mDataSet.get(position).getAdresse());
         viewHolder.getPrixTextView().setText(String.format("%,.2f €", mDataSet.get(position).getPrix()));
+        viewHolder.getImageView().setImageBitmap(bmpImage);
     }
 
     // Return the size of dataset (invoked by the layout manager)

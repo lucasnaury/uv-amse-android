@@ -25,16 +25,17 @@
             android:text="Adresse, 59000 Douai" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/image_annonce"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_background" />
 
         <TextView
             android:id="@+id/titre_annonce"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
+            android:layout_below="@+id/image_annonce"
             android:fontFamily="sans-serif-medium"
             android:text="Titre annonce de test"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />

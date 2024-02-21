@@ -23,10 +23,15 @@
         android:paddingBottom="8dp">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/image_annonce"
             android:layout_width="70dp"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:foregroundGravity="fill_horizontal|fill_vertical"
+            android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_background"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,11 +40,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
             android:fontFamily="sans-serif-medium"
             android:text="Titre annonce de test"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/image_annonce"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView

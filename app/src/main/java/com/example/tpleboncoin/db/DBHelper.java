@@ -26,11 +26,11 @@ public class DBHelper extends SQLiteOpenHelper {
     static final String DB_NAME = "LEBONCOIN.DB";
 
     // database version
-    static final int DB_VERSION = 2;
+    static final int DB_VERSION = 3;
 
     // Creating table query
     private static final String CREATE_TABLE = "create table " + TABLE_NAME + "(" + _ID
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + TITLE + " TEXT NOT NULL, " + ADDRESS + " TEXT, " + IMAGE + " TEXT, " + PRICE + " DOUBLE, " + DESCRIPTION + " TEXT);";
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + TITLE + " TEXT NOT NULL, " + ADDRESS + " TEXT, " + IMAGE + " BLOB, " + PRICE + " DOUBLE, " + DESCRIPTION + " TEXT);";
 
     public DBHelper(Context context) {
         super(context,
@@ -64,11 +64,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String title = data.getString(data.getColumnIndexOrThrow(TITLE));
         String address = data.getString(data.getColumnIndexOrThrow(ADDRESS));
-        String image = data.getString(data.getColumnIndexOrThrow(IMAGE));
+        byte[] image = data.getBlob(data.getColumnIndexOrThrow(IMAGE));
         double price = data.getDouble(data.getColumnIndexOrThrow(PRICE));
         String description = data.getString(data.getColumnIndexOrThrow(DESCRIPTION));
-
-        data.close();
 
         return new Annonce(title, address, image, price, description);
     }

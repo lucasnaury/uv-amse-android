@@ -163,7 +163,7 @@ public class HomeFragment extends Fragment {
      */
     private void initDataset() {
         DBManager dbManager = DBManager.getDBManager(this.getContext());
-        dbManager.open();
+        dbManager.open(this.getContext());
 
         // On récupère toutes les annonces de la DB
         mDataset = reverseArrayList(dbManager.getAll());
