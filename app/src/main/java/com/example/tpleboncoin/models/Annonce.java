@@ -12,13 +12,15 @@ public class Annonce implements Parcelable {
     private String  adresse;
     private double prix;
     private String image;
+    private String description;
 
     // Constructeur
-    public Annonce(String titre, String adresse, String image, double prix) {
+    public Annonce(String titre, String adresse, String image, double prix, String description) {
         this.titre = titre;
         this.adresse = adresse;
         this.image = image;
         this.prix = prix;
+        this.description = description;
 
         // Génération d'un id automatique
         this.id = Annonce.nbAnnonces;
@@ -36,6 +38,7 @@ public class Annonce implements Parcelable {
     public double getPrix(){return prix;}
     public String getAdresse(){return adresse;}
     public String getImage(){return image;}
+    public String getDescription(){return description;}
 
 
     // Parcelable
