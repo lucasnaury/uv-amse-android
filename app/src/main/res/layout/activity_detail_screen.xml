@@ -107,7 +107,7 @@
                 android:paddingStart="20dp"
                 android:paddingTop="10dp"
                 android:paddingEnd="25dp"
-                android:paddingRight="20dp"
+                android:paddingRight="25dp"
                 android:text="TextView"
                 android:textAllCaps="false"
                 android:textColor="#9F000000"
