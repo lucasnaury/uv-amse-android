@@ -24,8 +24,8 @@ public class DetailScreen extends AppCompatActivity {
                 binding.adresseTextView.setText(annonce.getAdresse());
                 binding.prixTextView.setText( Double.toString(annonce.getPrix()) + " €");
                 binding.imageView.setImageResource(R.drawable.ic_account_circle_black_24dp);
-                binding.descriptionTextView4.setText(annonce.);
-                binding.titreTextView.setText(titre);
+                binding.descriptionTextView4.setText(annonce.getDescription());
+                binding.titreTextView.setText(annonce.getTitre());
             }
         }
 }
