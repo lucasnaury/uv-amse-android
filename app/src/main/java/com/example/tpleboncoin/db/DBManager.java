@@ -24,6 +24,7 @@ public class DBManager {
 
     private DBManager(Context c) {
         context = c;
+
     }
 
     public static DBManager getDBManager(Context context) {
@@ -38,7 +39,8 @@ public class DBManager {
         database = dbHelper.getWritableDatabase();
 
         //S'il n'y a pas d'annonce, on initialise une liste d'annonces
-        if(this.getAll().size() == 0){
+        Cursor cursor = fetch();
+        if(cursor != null && cursor.getCount() == 0){
             init();
         }
 
@@ -51,7 +53,6 @@ public class DBManager {
 
     // Add ads manually.
     public void init(){
-        open();
         insert(new Annonce("Wood", "Douai", "https://media.istockphoto.com/id/134253640/photo/construction-of-a-wooden-roof-frame-underway.jpg?s=612x612&w=0&k=20&c=e5gUkic9LGQWahIdHozOsEzHKy_HtsmvmtOHmYsejSU=",24.99, "High-quality seasoned firewood for sale! Perfect for cozy nights by the fireplace or powering your wood-burning stove. Our carefully selected wood is sourced sustainably, ensuring both quality and environmental responsibility. Available for delivery to your doorstep, our firewood is split and ready to use, saving you time and effort. Whether you're a homeowner, camper, or outdoor enthusiast, our firewood is ideal for all your needs. Stock up now and enjoy the warmth and ambiance of natural wood burning. Don't miss out on this opportunity to elevate your fire experience. Contact us today to place your order!"));
         insert(new Annonce("Steel", "Lille", "https://as2.ftcdn.net/v2/jpg/03/91/83/87/1000_F_391838708_4HFADW5beay2VVlnoual6Qi5fWeIaD9V.jpg", 18.9, "Premium steel available for sale! Engineered for strength and durability, our high-grade steel is suitable for a wide range of applications. Whether you're a contractor, builder, or DIY enthusiast, our steel products are perfect for construction projects, fabrication, or repairs. With various sizes and shapes available, we cater to diverse needs and specifications. Our steel undergoes rigorous quality checks to ensure top-notch performance and reliability. Conveniently order online and have it delivered to your location. Upgrade your projects with our superior steel today. Contact us now to place your order and experience the difference!"));
         insert(new Annonce("Clay", "Douai", "https://constrofacilitator.com/wp-content/uploads/2020/02/clay-in-construction.jpg", 7.88, "Quality clay for sale! Ideal for pottery, sculpting, and crafting projects, our premium-grade clay offers versatility and excellent molding properties. Sourced from reliable suppliers, our clay is carefully processed to ensure consistency and workability. Whether you're a professional artist or a hobbyist, our clay is perfect for bringing your creative visions to life. Available in various quantities, we cater to both small-scale and large-scale projects. Order online for convenient delivery to your doorstep. Elevate your crafting experience with our top-quality clay. Contact us today to place your order and unleash your artistic potential!"));
@@ -104,6 +105,10 @@ public class DBManager {
         ArrayList<Annonce> annonces = new ArrayList<Annonce>();
 
         Cursor cursor = this.fetch();
+
+        if(cursor == null || cursor.getCount() == 0){
+            return annonces;
+        }
 
         do {
             String titre = cursor.getString(abs(cursor.getColumnIndex(DBHelper.TITLE)));
