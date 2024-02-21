@@ -2,6 +2,7 @@
     <string name="app_name">TP LeBonCoin</string>
     <string name="title_home">Accueil</string>
     <string name="title_add">Ajout</string>
+    <string name="title_add_top">Création d\'une annonce</string>
     <string name="title_profile">Profil</string>
     <string name="text_annonce">test</string>
     <string name="linear_layout_manager">Liste</string>

@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/navigation_ajout_annonce"
         android:name="com.example.tpleboncoin.ui.ajout_annonce.AjoutAnnonceFragment"
-        android:label="@string/title_add"
+        android:label="@string/title_add_top"
         tools:layout="@layout/fragment_ajout_annonce" />
 
     <fragment
