@@ -49,6 +49,7 @@ public class AjoutAnnonceFragment extends Fragment {
         final EditText titreAnnonce = binding.titreAnnonce;
         final EditText adresseAnnonce = binding.adresseAnnonce;
         final EditText prixAnnonce = binding.prixAnnonce;
+        final EditText descriptionAnnonce = binding.descriptionAnnonce;
         final Button boutonCreation = binding.boutonAjoutAnnonce;
 
         // Initialisation de la DB
@@ -68,15 +69,11 @@ public class AjoutAnnonceFragment extends Fragment {
                 }
 
                 // On créé l'objet de la nouvelle annonce
-                Annonce nouvelleAnnonce = new Annonce(titreAnnonce.getText().toString(), adresseAnnonce.getText().toString(), "", Double.parseDouble(prixAnnonce.getText().toString()));
-
-                // On navigue vers la page d'accueil en passant la nouvelle annonce comme paramètre
-//                Bundle bundle = new Bundle();
-//                bundle.putParcelable("nouvelleAnnonce", nouvelleAnnonce);
-//                Navigation.findNavController(view).navigate(R.id.navigation_home, bundle);
+                Annonce nouvelleAnnonce = new Annonce(titreAnnonce.getText().toString(), adresseAnnonce.getText().toString(), "", Double.parseDouble(prixAnnonce.getText().toString()), descriptionAnnonce.getText().toString());
 
                 //On ajoute la nouvelle annonce à la DB
                 dbManager.insert(nouvelleAnnonce);
+
                 //On navigue vers la page de liste des annonces
                 Navigation.findNavController(view).navigate(R.id.navigation_home);
 
