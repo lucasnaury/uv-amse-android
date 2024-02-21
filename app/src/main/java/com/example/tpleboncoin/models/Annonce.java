@@ -54,6 +54,7 @@ public class Annonce implements Parcelable {
 
         parcel.writeDouble(prix);
         parcel.writeString(image);
+        parcel.writeString(description);
         parcel.writeInt(id);
     }
     public static final Parcelable.Creator<Annonce> CREATOR
@@ -71,6 +72,7 @@ public class Annonce implements Parcelable {
         adresse = in.readString();
         prix = in.readDouble();
         image = in.readString();
+        description = in.readString();
         id = in.readInt();
     }
 }
