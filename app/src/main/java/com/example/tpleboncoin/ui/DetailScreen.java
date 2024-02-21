@@ -5,6 +5,9 @@ import com.example.tpleboncoin.databinding.ActivityDetailScreenBinding;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.tpleboncoin.R;
 import com.example.tpleboncoin.models.Annonce;
@@ -27,5 +30,14 @@ public class DetailScreen extends AppCompatActivity {
                 binding.descriptionTextView4.setText(annonce.getDescription());
                 binding.titreTextView.setText(annonce.getTitre());
             }
+            binding.smsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View arg0) {
+                    Intent smsIntent = new Intent(Intent.ACTION_MAIN);
+                    smsIntent.addCategory(Intent.CATEGORY_APP_MESSAGING);
+                    startActivity(smsIntent);
+                }
+            });
+
         }
 }
