@@ -28,7 +28,6 @@ public class HomeFragment extends Fragment {
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
-    private static final int DATASET_COUNT = 60;
 
     private enum LayoutManagerType {
         GRID_LAYOUT_MANAGER,
@@ -167,7 +166,21 @@ public class HomeFragment extends Fragment {
         dbManager.open();
 
         // On récupère toutes les annonces de la DB
-        mDataset = dbManager.getAll();
+        mDataset = reverseArrayList(dbManager.getAll());
 
+    }
+
+    public ArrayList<Annonce> reverseArrayList(ArrayList<Annonce> alist)
+    {
+        // Arraylist for storing reversed elements
+        ArrayList<Annonce> revArrayList = new ArrayList<Annonce>();
+        for (int i = alist.size() - 1; i >= 0; i--) {
+
+            // Append the elements in reverse order
+            revArrayList.add(alist.get(i));
+        }
+
+        // Return the reversed arraylist
+        return revArrayList;
     }
 }

@@ -26,6 +26,7 @@ import androidx.navigation.Navigation;
 
 import com.example.tpleboncoin.R;
 import com.example.tpleboncoin.databinding.FragmentAjoutAnnonceBinding;
+import com.example.tpleboncoin.db.DBManager;
 import com.example.tpleboncoin.models.Annonce;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -34,6 +35,7 @@ public class AjoutAnnonceFragment extends Fragment {
     private FragmentAjoutAnnonceBinding binding;
 
     private ActivityResultLauncher<Intent> activityResultLauncher;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -49,6 +51,11 @@ public class AjoutAnnonceFragment extends Fragment {
         final EditText prixAnnonce = binding.prixAnnonce;
         final Button boutonCreation = binding.boutonAjoutAnnonce;
 
+        // Initialisation de la DB
+        DBManager dbManager = DBManager.getDBManager(this.getContext());
+        dbManager.open();
+
+
         boutonCreation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,12 +68,17 @@ public class AjoutAnnonceFragment extends Fragment {
                 }
 
                 // On créé l'objet de la nouvelle annonce
-                Annonce nouvelleAnnonce = new Annonce(titreAnnonce.getText().toString(), adresseAnnonce.getText().toString(), 0, Double.parseDouble(prixAnnonce.getText().toString()));
+                Annonce nouvelleAnnonce = new Annonce(titreAnnonce.getText().toString(), adresseAnnonce.getText().toString(), "", Double.parseDouble(prixAnnonce.getText().toString()));
 
                 // On navigue vers la page d'accueil en passant la nouvelle annonce comme paramètre
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("nouvelleAnnonce", nouvelleAnnonce);
-                Navigation.findNavController(view).navigate(R.id.navigation_home, bundle);
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelable("nouvelleAnnonce", nouvelleAnnonce);
+//                Navigation.findNavController(view).navigate(R.id.navigation_home, bundle);
+
+                //On ajoute la nouvelle annonce à la DB
+                dbManager.insert(nouvelleAnnonce);
+                //On navigue vers la page de liste des annonces
+                Navigation.findNavController(view).navigate(R.id.navigation_home);
 
             }
         });
