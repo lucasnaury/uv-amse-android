@@ -101,6 +101,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
         // with that element
         viewHolder.getTitreTextView().setText(mDataSet.get(position).getTitre());
         viewHolder.getAdresseTextView().setText(mDataSet.get(position).getAdresse());
+        viewHolder.getPrixTextView().setText(String.format("%,.2f €", mDataSet.get(position).getPrix()));
     }
 
     // Return the size of dataset (invoked by the layout manager)
