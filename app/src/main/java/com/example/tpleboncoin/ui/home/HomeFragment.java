@@ -86,7 +86,7 @@ public class HomeFragment extends Fragment {
         }
 
         // adapter pour gérer le visu de l'annonce
-        mAdapter = new HomeAdapter(mDataset, false);
+        mAdapter = new HomeAdapter(mDataset, false, this.getContext());
         mRecyclerView.setAdapter(mAdapter);
 
         // bouton pour changer de layout
@@ -130,7 +130,7 @@ public class HomeFragment extends Fragment {
                 mCurrentLayoutManagerType = LayoutManagerType.GRID_LAYOUT_MANAGER;
 
                 // redéfinition de l'adapter
-                mAdapter = new HomeAdapter(mDataset, true);
+                mAdapter = new HomeAdapter(mDataset, true, this.getContext());
                 mRecyclerView.setAdapter(mAdapter);
                 break;
             case LINEAR_LAYOUT_MANAGER:
@@ -138,7 +138,7 @@ public class HomeFragment extends Fragment {
                 mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
 
                 // redéfinition de l'adapter
-                mAdapter = new HomeAdapter(mDataset, false);
+                mAdapter = new HomeAdapter(mDataset, false, this.getContext());
                 mRecyclerView.setAdapter(mAdapter);
                 break;
             default:

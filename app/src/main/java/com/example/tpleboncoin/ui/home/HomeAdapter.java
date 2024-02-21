@@ -1,24 +1,31 @@
 package com.example.tpleboncoin.ui.home;
 
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tpleboncoin.R;
 import com.example.tpleboncoin.models.Annonce;
+import com.example.tpleboncoin.ui.DetailScreen;
 
 import java.util.ArrayList;
 
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder>  {
     private static final String TAG = "CustomAdapter";
 
     private ArrayList<Annonce> mDataSet;
     private boolean mIsGrid;
+    private static Context mContext;
 
     /**
      * Provide a reference to the type of views that you are using (custom ViewHolder)
@@ -34,6 +41,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     // TODO : mettre la page de Donia
+                    Intent detailIntent = new Intent(mContext, DetailScreen.class);
+                    detailIntent.putExtra("titre", titreTextView.getText());
+                    detailIntent.putExtra("adresse", adresseTextView.getText());
+                    v.getContext().startActivity(detailIntent);
+                    //detailIntent.putExtra("prix", prix);
                     Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
                 }
             });
@@ -55,9 +67,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
      * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
      * @param isGrid boolean = le layout actuel (grille ou linéaire)
      */
-    public HomeAdapter(ArrayList<Annonce> dataSet, boolean isGrid) {
+    public HomeAdapter(ArrayList<Annonce> dataSet, boolean isGrid, Context context) {
         mDataSet = dataSet;
         mIsGrid = isGrid;
+        mContext = context;
     }
 
     // Create new views (invoked by the layout manager)

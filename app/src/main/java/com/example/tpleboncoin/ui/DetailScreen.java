@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.tpleboncoin.R;
+import com.example.tpleboncoin.models.Annonce;
 
 public class DetailScreen extends AppCompatActivity {
         ActivityDetailScreenBinding binding;
@@ -18,11 +19,11 @@ public class DetailScreen extends AppCompatActivity {
             setContentView(binding.getRoot());
             Intent intent = this.getIntent();
             if (intent != null){
+                Annonce annonce = intent.getParcelableExtra("annonce");
                 String titre = intent.getStringExtra("titre");
                 String adresse = intent.getStringExtra("adresse");
                 String description = intent.getStringExtra("description");
                 Double prix = intent.getDoubleExtra("prix",999);
-
 
                 binding.adresseTextView.setText(adresse);
                 binding.prixTextView.setText(prix.toString()+" €");
