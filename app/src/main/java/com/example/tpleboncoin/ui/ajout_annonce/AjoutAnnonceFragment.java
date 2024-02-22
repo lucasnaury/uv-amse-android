@@ -54,6 +54,8 @@ public class AjoutAnnonceFragment extends Fragment {
         final EditText adresseAnnonce = binding.adresseAnnonce;
         final EditText prixAnnonce = binding.prixAnnonce;
         final EditText descriptionAnnonce = binding.descriptionAnnonce;
+        final EditText telephoneAnnonce = binding.telephoneAnnonce;
+        final EditText emailAnnonce = binding.emailAnnonce;
         final ImageView imageAnnonce = binding.imageAnnonce;
         final Button boutonCreation = binding.boutonAjoutAnnonce;
 
@@ -65,10 +67,10 @@ public class AjoutAnnonceFragment extends Fragment {
         boutonCreation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // On vérifie si les informations sont correctement remplies
+                // On vérifie si les informations obligatoires sont correctement remplies
                 if(titreAnnonce.getText().toString().equals("") || adresseAnnonce.getText().toString().equals("") || prixAnnonce.getText().toString().equals("")){
 
-                    Snackbar.make(view, "Veuillez remplir les champs pour créer l'annonce", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view, "Veuillez remplir les champs marqués d'un * pour créer l'annonce", Snackbar.LENGTH_LONG).show();
 
                     return;
                 }
@@ -86,7 +88,7 @@ public class AjoutAnnonceFragment extends Fragment {
 
 
                 // On créé l'objet de la nouvelle annonce
-                Annonce nouvelleAnnonce = new Annonce(titreAnnonce.getText().toString(), adresseAnnonce.getText().toString(), imageInByte, Double.parseDouble(prixAnnonce.getText().toString()), descriptionAnnonce.getText().toString());
+                Annonce nouvelleAnnonce = new Annonce(titreAnnonce.getText().toString(), adresseAnnonce.getText().toString(), imageInByte, Double.parseDouble(prixAnnonce.getText().toString()), descriptionAnnonce.getText().toString(), telephoneAnnonce.getText().toString(), emailAnnonce.getText().toString());
 
                 //On ajoute la nouvelle annonce à la DB
                 dbManager.insert(nouvelleAnnonce);

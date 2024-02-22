@@ -18,19 +18,24 @@ public class Annonce implements Parcelable {
     private double prix;
     private byte[] image;
     private String description;
+    private String numeroTelephone;
+    private String email;
 
     // Constructeur
-    public Annonce(String titre, String adresse, byte[] image, double prix, String description) {
+    public Annonce(String titre, String adresse, byte[] image, double prix, String description, String numTel, String email) {
         this.titre = titre;
         this.adresse = adresse;
         this.image = image;
         this.prix = prix;
         this.description = description;
+        this.numeroTelephone = numTel;
+        this.email = email;
 
         // Génération d'un id automatique
         this.id = Annonce.nbAnnonces;
         Annonce.nbAnnonces++;
     }
+
 
     // Getter et Setter
     public String getTitre() {
@@ -55,6 +60,8 @@ public class Annonce implements Parcelable {
         return bmpImage;
     }
     public String getDescription(){return description;}
+    public String getNumeroTelephone(){return numeroTelephone;}
+    public String getEmail(){return email;}
 
 
     // Parcelable
@@ -78,6 +85,9 @@ public class Annonce implements Parcelable {
 
         parcel.writeString(description);
         parcel.writeInt(id);
+
+        parcel.writeString(numeroTelephone);
+        parcel.writeString(email);
     }
     public static final Parcelable.Creator<Annonce> CREATOR
             = new Parcelable.Creator<Annonce>() {
@@ -107,5 +117,8 @@ public class Annonce implements Parcelable {
 
         description = in.readString();
         id = in.readInt();
+
+        numeroTelephone = in.readString();
+        email = in.readString();
     }
 }

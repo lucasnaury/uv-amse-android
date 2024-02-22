@@ -154,10 +154,55 @@
             android:minHeight="@dimen/activity_vertical_margin" />
 
         <TextView
+            android:id="@+id/labelTelephone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="Téléphone : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <EditText
+            android:id="@+id/telephoneAnnonce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="ex: 0123456789"
+            android:inputType="text"
+            android:textColorHint="#4D000000" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/activity_vertical_margin" />
+
+        <TextView
+            android:id="@+id/labelEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="Email : "
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <EditText
+            android:id="@+id/emailAnnonce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="ex: john.doe@mail.com"
+            android:inputType="text"
+            android:textColorHint="#4D000000" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/activity_vertical_margin" />
+
+        <TextView
             android:id="@+id/warningObligatoire"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Les champs marqués d'un * sont obligatoires"
+            android:textAlignment="viewStart"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="#52000000" />
 
@@ -165,7 +210,9 @@
             android:id="@+id/boutonAjoutAnnonce"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
             android:text="ajouter" />
+
     </LinearLayout>
 
 </ScrollView>
