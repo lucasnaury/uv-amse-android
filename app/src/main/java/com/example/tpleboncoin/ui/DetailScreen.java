@@ -61,6 +61,7 @@ public class DetailScreen extends AppCompatActivity {
                     Uri uri = Uri.parse("smsto:" + annonce.getNumeroTelephone());
                     Intent smsIntent = new Intent(Intent.ACTION_SENDTO, uri);
                     smsIntent.putExtra("sms_body", "Bonjour,\nJe suis intéressé par votre annonce \""+ annonce.getTitre()+"\", n'hésitez pas à me recontacter. \n\n Merci");
+
                     startActivity(smsIntent);
                 }
             });
@@ -72,8 +73,8 @@ public class DetailScreen extends AppCompatActivity {
                     Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                             "mailto", annonce.getEmail(), null));
                     emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Réponse à l'annonce - " + annonce.getTitre());
-//                    emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
-                    startActivity(Intent.createChooser(emailIntent, "Envoi d'email"));
+
+                    startActivity(emailIntent);
                 }
             });
 
