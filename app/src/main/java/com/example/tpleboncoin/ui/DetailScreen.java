@@ -58,11 +58,9 @@ public class DetailScreen extends AppCompatActivity {
             binding.smsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
-                    Intent smsIntent = new Intent(Intent.ACTION_VIEW);
-                    smsIntent.setData(Uri.parse("sms:"));
-                    smsIntent.setType("vnd.android-dir/mms-sms");
-                    smsIntent.putExtra(Intent.EXTRA_TEXT, "");
-                    smsIntent.putExtra("address",  annonce.getNumeroTelephone());
+                    Uri uri = Uri.parse("smsto:" + annonce.getNumeroTelephone());
+                    Intent smsIntent = new Intent(Intent.ACTION_SENDTO, uri);
+                    smsIntent.putExtra("sms_body", "Bonjour,\nJe suis intéressé par votre annonce \""+ annonce.getTitre()+"\", n'hésitez pas à me recontacter. \n\n Merci");
                     startActivity(smsIntent);
                 }
             });
