@@ -17,9 +17,4 @@
         android:label="@string/title_add_top"
         tools:layout="@layout/fragment_ajout_annonce" />
 
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.tpleboncoin.ui.notifications.NotificationsFragment"
-        android:label="@string/title_profile"
-        tools:layout="@layout/fragment_notifications" />
 </navigation>

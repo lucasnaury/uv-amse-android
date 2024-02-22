@@ -11,9 +11,4 @@
         android:icon="@drawable/ic_baseline_add_box_24"
         android:title="@string/title_add" />
 
-    <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_account_circle_black_24dp"
-        android:title="@string/title_profile" />
-
 </menu>
